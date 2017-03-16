@@ -70,6 +70,12 @@
                     <p>This is some text.</p>
                     <p>This is another text.</p>
 
+                    <p:dataTable value="#{usuarioController.usuarios}" var="u">
+                        <p:column headerText="Id">
+                            <h:outputText value="#{u.usuariosNome}" />
+                        </p:column>                        
+                    </p:dataTable>
+
 
                 </div>
             </div>

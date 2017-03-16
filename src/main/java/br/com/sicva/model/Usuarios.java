@@ -33,9 +33,7 @@ public class Usuarios  implements java.io.Serializable {
      @JoinTable(name = "usuarios_funcao", joinColumns = @JoinColumn(name = "USUARIOS_FUNCAO_USUARIOS_CPF"), inverseJoinColumns = @JoinColumn(name = "USUARIOS_FUNCAO_DESCRICAO"))
      private List<Funcao> funcoes;
      
-     private Set registrosVacinases = new HashSet(0);
-     private Set pacienteses = new HashSet(0);
-     private Set usuariosFuncaos = new HashSet(0);
+     
 
     public Usuarios() {
     }
@@ -44,14 +42,12 @@ public class Usuarios  implements java.io.Serializable {
     public Usuarios(String usuariosCpf) {
         this.usuariosCpf = usuariosCpf;
     }
-    public Usuarios(String usuariosCpf, String usuariosNome, String usuarioSenha, Boolean usuarioAtivo, Set registrosVacinases, Set pacienteses, Set usuariosFuncaos) {
+    public Usuarios(String usuariosCpf, String usuariosNome, String usuarioSenha, Boolean usuarioAtivo) {
        this.usuariosCpf = usuariosCpf;
        this.usuariosNome = usuariosNome;
        this.usuarioSenha = usuarioSenha;
        this.usuarioAtivo = usuarioAtivo;
-       this.registrosVacinases = registrosVacinases;
-       this.pacienteses = pacienteses;
-       this.usuariosFuncaos = usuariosFuncaos;
+       
     }
    
     public String getUsuariosCpf() {
@@ -82,10 +78,7 @@ public class Usuarios  implements java.io.Serializable {
     public void setUsuarioAtivo(Boolean usuarioAtivo) {
         this.usuarioAtivo = usuarioAtivo;
     }
-    public Set getRegistrosVacinases() {
-        return this.registrosVacinases;
-    }
-
+    
     public List<Funcao> getFuncoes() {
         return funcoes;
     }
@@ -95,26 +88,7 @@ public class Usuarios  implements java.io.Serializable {
     }
         
     
-    public void setRegistrosVacinases(Set registrosVacinases) {
-        this.registrosVacinases = registrosVacinases;
-    }
-    public Set getPacienteses() {
-        return this.pacienteses;
-    }
-    
-    public void setPacienteses(Set pacienteses) {
-        this.pacienteses = pacienteses;
-    }
-    public Set getUsuariosFuncaos() {
-        return this.usuariosFuncaos;
-    }
-    
-    public void setUsuariosFuncaos(Set usuariosFuncaos) {
-        this.usuariosFuncaos = usuariosFuncaos;
-    }
-
-
-
+   
 
 }
 

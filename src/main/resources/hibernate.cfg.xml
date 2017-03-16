@@ -6,15 +6,15 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sicva?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">123</property>
-    <mapping class="br/com/sicva/model/Usuarios.class"/>
-    <mapping resource="br/com/sicva/model/Enderecos.hbm.xml"/>
-    <mapping resource="br/com/sicva/model/ItensVacinas.hbm.xml"/>
-    <mapping resource="br/com/sicva/model/Vacinas.hbm.xml"/>
-    <mapping resource="br/com/sicva/model/CarteirasVacinas.hbm.xml"/>
-    <mapping resource="br/com/sicva/model/Pacientes.hbm.xml"/>
-    <mapping resource="br/com/sicva/model/RegistrosVacinas.hbm.xml"/>
-    <mapping resource="br/com/sicva/model/Ubs.hbm.xml"/>
-    <mapping resource="br/com/sicva/model/Funcao.hbm.xml"/>    
+    <property name="hibernate.connection.password">123</property> 
+    <mapping class="br.com.sicva.model.CarteirasVacinas"/>
+    <mapping class="br.com.sicva.model.Enderecos"/>
+    <mapping class="br.com.sicva.model.Funcao"/>
+    <mapping class="br.com.sicva.model.ItensVacinas"/>
+    <mapping class="br.com.sicva.model.Pacientes"/>
+    <mapping class="br.com.sicva.model.RegistrosVacinas"/>
+    <mapping class="br.com.sicva.model.Ubs"/>
+    <mapping class="br.com.sicva.model.Usuarios"/>
+    <mapping class="br.com.sicva.model.Vacinas"/>      
   </session-factory>
 </hibernate-configuration>
