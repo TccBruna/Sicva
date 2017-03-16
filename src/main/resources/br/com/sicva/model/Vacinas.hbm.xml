@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/03/2017 13:54:36 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="br.com.sicva.model.Vacinas" table="vacinas" catalog="sicva" optimistic-lock="version">
+        <id name="vacinasCodigo" type="java.lang.Integer">
+            <column name="VACINAS_CODIGO" />
+            <generator class="identity" />
+        </id>
+        <property name="vacinasDescricao" type="string">
+            <column name="VACINAS_DESCRICAO" length="30" />
+        </property>
+        <set name="carteirasVacinases" table="carteiras_vacinas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CARTEIRAS_VACINAS_CODIGO" />
+            </key>
+            <one-to-many class="br.com.sicva.model.CarteirasVacinas" />
+        </set>
+    </class>
+</hibernate-mapping>

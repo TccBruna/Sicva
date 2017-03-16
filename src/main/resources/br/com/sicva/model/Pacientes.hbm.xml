@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/03/2017 13:54:36 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="br.com.sicva.model.Pacientes" table="pacientes" catalog="sicva" optimistic-lock="version">
+        <id name="pacientesNumeroRegistroNascimento" type="java.lang.Integer">
+            <column name="PACIENTES_NUMERO_REGISTRO_NASCIMENTO" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="enderecos" class="br.com.sicva.model.Enderecos" fetch="select">
+            <column name="PACIENTES_ENDERECOS_ID" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="br.com.sicva.model.Usuarios" fetch="select">
+            <column name="PACIENTES_USUARIO_CPF" length="14" />
+        </many-to-one>
+        <property name="pacientesCpf" type="string">
+            <column name="PACIENTES_CPF" length="14" not-null="true" />
+        </property>
+        <property name="pacientesNome" type="string">
+            <column name="PACIENTES_NOME" length="50" />
+        </property>
+        <property name="pacientesDataNascimento" type="string">
+            <column name="PACIENTES_DATA_NASCIMENTO" length="10" />
+        </property>
+        <property name="pacientesNomeResponsavel" type="string">
+            <column name="PACIENTES_NOME_RESPONSAVEL" length="60" />
+        </property>
+        <property name="pacientesFone1" type="string">
+            <column name="PACIENTES_FONE1" length="11" />
+        </property>
+        <property name="pacientesFone2" type="string">
+            <column name="PACIENTES_FONE2" length="11" />
+        </property>
+        <set name="registrosVacinases" table="registros_vacinas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="REGISTROS_PACIENTES_NUMERO_REGISTRO_NASCIMENTO" />
+            </key>
+            <one-to-many class="br.com.sicva.model.RegistrosVacinas" />
+        </set>
+        <set name="carteirasVacinases" table="carteiras_vacinas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CARTEIRAS_PACIENTES_NUMERO_REGISTRO_NASCIMENTO" />
+            </key>
+            <one-to-many class="br.com.sicva.model.CarteirasVacinas" />
+        </set>
+    </class>
+</hibernate-mapping>

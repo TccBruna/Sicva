@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/03/2017 13:54:36 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="br.com.sicva.model.CarteirasVacinas" table="carteiras_vacinas" catalog="sicva" optimistic-lock="version">
+        <id name="carteirasId" type="java.lang.Integer">
+            <column name="CARTEIRAS_ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pacientes" class="br.com.sicva.model.Pacientes" fetch="select">
+            <column name="CARTEIRAS_PACIENTES_NUMERO_REGISTRO_NASCIMENTO" />
+        </many-to-one>
+        <many-to-one name="vacinas" class="br.com.sicva.model.Vacinas" fetch="select">
+            <column name="CARTEIRAS_VACINAS_CODIGO" />
+        </many-to-one>
+        <property name="carteirasStatus" type="string">
+            <column name="CARTEIRAS_STATUS" length="11" />
+        </property>
+        <property name="carteirasFaixaEtaria" type="string">
+            <column name="CARTEIRAS_FAIXA_ETARIA" length="10" />
+        </property>
+        <property name="carteirasPeriodo" type="string">
+            <column name="CARTEIRAS_PERIODO" length="14" />
+        </property>
+        <property name="carteirasProximaData" type="date">
+            <column name="CARTEIRAS_PROXIMA_DATA" length="10" />
+        </property>
+        <set name="registrosVacinases" table="registros_vacinas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="REGISTROS_CARTEIRAS_ID" />
+            </key>
+            <one-to-many class="br.com.sicva.model.RegistrosVacinas" />
+        </set>
+    </class>
+</hibernate-mapping>
