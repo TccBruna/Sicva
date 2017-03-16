@@ -17,8 +17,8 @@
 	<authentication-manager>
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="SELECT login as username, senha as password, ativo as enable FROM usuario WHERE login=?"
-				authorities-by-username-query="SELECT usuario_login AS username, acesso_nome AS authority FROM usuario_acesso WHERE usuario_login=?" />
+				users-by-username-query="SELECT USUARIOS_CPF as username, USUARIO_SENHA as password, USUARIO_ATIVO as enable FROM usuarios WHERE USUARIOS_CPF=?"
+				authorities-by-username-query="SELECT USUARIOS_FUNCAO_USUARIOS_CPF AS username, USUARIOS_FUNCAO_DESCRICAO AS authority FROM usuarios_funcao WHERE USUARIOS_FUNCAO_USUARIOS_CPF=?" />
 		</authentication-provider>
 	</authentication-manager>
 
