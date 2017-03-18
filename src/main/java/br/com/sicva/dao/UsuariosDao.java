@@ -14,7 +14,7 @@ import org.hibernate.Transaction;
 
 /**
  *
- * @author Mauricio
+ * @author Rodrigo
  */
 public class UsuariosDao {
     private Session session;
@@ -58,10 +58,5 @@ public class UsuariosDao {
         session.close();
         return listarUsuarios;
     }
-    public static void main(String[] args) {
-        UsuariosDao dao = new UsuariosDao();
-        for(Usuarios u: dao.listarUsuarios()){
-            System.out.println(""+u.getUsuariosNome());
-        }
-    }
+    
 }

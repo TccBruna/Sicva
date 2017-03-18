@@ -24,6 +24,8 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+
+
     </h:head>    
     <h:body id="body" pt:data-spy="scroll" pt:data-target=".menu-navegacao" pt:data-offset="80">
         <!--Menu da Aplicação  -->
@@ -39,24 +41,8 @@
                 </div>
                 <div class="collapse navbar-collapse menu-navegacao" id="menu-navegacao">
                     <ul class="nav navbar-nav navbar-right ">
-                        <li><a class="scrollSuave" href="#inicio">Início</a></li>
-                        <li><a class="scrollSuave" href="#servicos">Serviços</a></li>
-                        <li><a class="scrollSuave" href="#portifolio">Portifólio</a></li>
-                        <li><a class="scrollSuave" href="#quem-somos">Quem Somos</a></li>
-                        <li><a class="scrollSuave" href="#localizacao">Localização</a></li>
-                        <li><a class="scrollSuave" href="#contato">Contato</a></li>                    
-                        <li  class="dropdown" id="menuLogin">
-                            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login</a>
-                            <div style="min-width: 250px; padding-top: 15px" class="dropdown-menu">
-                                <div class="col-xs-12">
-                                    <form class="form" id="formLogin" action="/j_spring_security_check" method="POST"> 
-                                        <input name="j_username" class="form-control" id="username" placeholder="Nome de Usuário" type="text"></input> 
-                                        <input name="j_password" class="form-control" id="password" placeholder="Senha" type="password"></input><br/>
-                                        <button type="button"   id="btnLogin" class="btn btn-default btn-block">Login</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </li>
+                        <li><a class="scrollSuave" href="#inicio">Início</a></li>                                           
+                        <li><a class="scrollSuave" href="login.xhtml">Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -65,31 +51,31 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <h:outputText value="Usuário e/	ou senha inválidos!"
-                                  rendered="#{param.error}"
-                                  style="color:darkred; font-size: 14px; padding-bottom: 10px;" />
-                    <form action="login" method="post">                        
+
+                    <form class="form-signin" name="f" action="j_spring_security_check" method="post">
+                        <h:outputText value="Usuário e/	ou senha inválidos!"
+                                      rendered="#{param.error}"
+                                      style="color:darkred; font-size: 20px; padding-bottom: 10px;" />                        
                         <h2 class="form-heading">Log in</h2>
                         <div class="form-group #{param.error != null ? 'has-error' : ''}">                   
                             <div class="form-group">
-                                <p:inputText id="username" required="true" requiredMessage="Por Favor Preencha o campo de Nome de Usuário" 
-                                             placeholder="Nome de Usuário" styleClass="form-control"  ></p:inputText>
-                                <p:message for="username"/>
+                                <p:inputText id="j_username" immediate="true" required="true" requiredMessage="Por Favor Preencha o campo CPF" 
+                                             placeholder="Digite o CPF" styleClass="form-control"  ></p:inputText>
+                                <p:message for="j_username"/>
                             </div>
                             <div class="form-group">
-                                <p:password id="password" required="true" requiredMessage="Por Favor Preencha o campo da senha"
-                                            placeholder="Senha" styleClass="form-control"  ></p:password>                            
+                                <p:password id="j_password" immediate="true"  required="true" requiredMessage="Por Favor Preencha o campo da senha"
+                                            placeholder="Senha" styleClass="form-control"  >                                    
+                                </p:password>                            
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>                            
-                                <p:message for="password" />
+                                <p:message for="j_password" />
                             </div>                    
                             <h:commandButton  styleClass="btn btn-lg btn-primary btn-block" value="Entrar"></h:commandButton>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="" id="remember-me" name="remember-me"/>Lembrar a Senha</label>
-                            </div>
-                            <h4 class="text-center"><a href="${contextPath}/registration">Criar Conta</a></h4>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" value="" id="remember-me" name="remember-me"/>Lembrar a Senha</label>
+                        </div>
                         
-
                     </form>
 
                 </div>
@@ -110,7 +96,8 @@
         </footer>
         <script src="resources/js/jquery.min.js"></script>   
         <script src="resources/js/bootstrap.min.js"></script>
-        <script src="resources/js/main.js"></script>  
+        <script src="resources/js/main.js"></script> 
+
     </h:body>
 </html>
 

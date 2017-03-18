@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <b:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:b="http://www.springframework.org/schema/beans"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:b="http://www.springframework.org/schema/beans"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans
 							http://www.springframework.org/schema/beans/spring-beans.xsd
 							http://www.springframework.org/schema/security
-                            http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+                            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/index.xhtml" access="hasRole('ROLE_USER')" />
+    <http auto-config="true">
+        <intercept-url pattern="/user/**" access="ROLE_USER" />
+        <intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+        <form-login login-page="/login.xhtml"                   
+                            authentication-failure-url="/login.xhtml?error=true"
+                            authentication-success-handler-ref="SimplesUrlAuthenticationSuccessHandler"/>
+        
+    </http>
+    
+    <b:bean id="SimplesUrlAuthenticationSuccessHandler"
+                class="br.com.sicva.seguranca.SimplesUrlAuthenticationSuccessHandler" />
+        
+   
+    <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSource"
+                                           users-by-username-query="SELECT USUARIOS_CPF as username, USUARIO_SENHA as password, USUARIO_ATIVO as enable FROM usuarios WHERE USUARIOS_CPF=?"
+                                           authorities-by-username-query="SELECT USUARIOS_FUNCAO_USUARIOS_CPF AS username, USUARIOS_FUNCAO_DESCRICAO AS authority FROM usuarios_funcao WHERE USUARIOS_FUNCAO_USUARIOS_CPF=?" />
+        </authentication-provider>
+    </authentication-manager>
 
-		<form-login login-page="/login.xhtml"
-			    authentication-failure-url="/login.xhtml?error=true"/>
-                <remember-me />
-	</http>
-
-	<authentication-manager>
-		<authentication-provider>
-			<jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="SELECT USUARIOS_CPF as username, USUARIO_SENHA as password, USUARIO_ATIVO as enable FROM usuarios WHERE USUARIOS_CPF=?"
-				authorities-by-username-query="SELECT USUARIOS_FUNCAO_USUARIOS_CPF AS username, USUARIOS_FUNCAO_DESCRICAO AS authority FROM usuarios_funcao WHERE USUARIOS_FUNCAO_USUARIOS_CPF=?" />
-		</authentication-provider>
-	</authentication-manager>
-
-	<b:bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<b:property name="url" value="jdbc:mysql://localhost:3306/sicva" />
-		<b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<b:property name="username" value="root" />
-		<b:property name="password" value="123" />
-	</b:bean>
+    <b:bean id="dataSource"
+                class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <b:property name="url" value="jdbc:mysql://localhost:3306/sicva" />
+        <b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <b:property name="username" value="root" />
+        <b:property name="password" value="123" />
+    </b:bean>
 </b:beans>
