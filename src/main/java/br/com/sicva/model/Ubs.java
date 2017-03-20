@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 16/03/2017 15:37:02 by Hibernate Tools 4.3.1
+// Generated 19/03/2017 21:26:58 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -23,16 +23,19 @@ public class Ubs  implements java.io.Serializable {
 
 
      private Integer ubsId;
-     private String ubsDescricao;
      private Zona zona;
-     
+     private String ubsDescricao;
 
     public Ubs() {
     }
 
-    public Ubs(String ubsDescricao, Zona zona) {
-       this.ubsDescricao = ubsDescricao; 
+	
+    public Ubs(Zona zona) {
+        this.zona = zona;
+    }
+    public Ubs(Zona zona, String ubsDescricao) {
        this.zona = zona;
+       this.ubsDescricao = ubsDescricao;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -47,6 +50,16 @@ public class Ubs  implements java.io.Serializable {
         this.ubsId = ubsId;
     }
 
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="UBS_ZONA_CODIGO", nullable=false)
+    public Zona getZona() {
+        return this.zona;
+    }
+    
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
+
     
     @Column(name="UBS_DESCRICAO", length=30)
     public String getUbsDescricao() {
@@ -56,19 +69,9 @@ public class Ubs  implements java.io.Serializable {
     public void setUbsDescricao(String ubsDescricao) {
         this.ubsDescricao = ubsDescricao;
     }
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="UBS_ZONA_CODIGO")
-    public Zona getZona() {
-        return zona;
-    }
 
-    public void setZona(Zona zona) {
-        this.zona = zona;
-    }
 
-    
 
-    
 
 }
 
