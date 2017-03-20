@@ -2,15 +2,14 @@ package br.com.sicva.model;
 // Generated 16/03/2017 15:37:02 by Hibernate Tools 4.3.1
 
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -25,13 +24,15 @@ public class Ubs  implements java.io.Serializable {
 
      private Integer ubsId;
      private String ubsDescricao;
+     private Zona zona;
      
 
     public Ubs() {
     }
 
-    public Ubs(String ubsDescricao) {
-       this.ubsDescricao = ubsDescricao;       
+    public Ubs(String ubsDescricao, Zona zona) {
+       this.ubsDescricao = ubsDescricao; 
+       this.zona = zona;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -55,7 +56,17 @@ public class Ubs  implements java.io.Serializable {
     public void setUbsDescricao(String ubsDescricao) {
         this.ubsDescricao = ubsDescricao;
     }
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="UBS_ZONA_CODIGO")
+    public Zona getZona() {
+        return zona;
+    }
 
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
+
+    
 
     
 
