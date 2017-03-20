@@ -25,7 +25,7 @@ public class Usuarios  implements java.io.Serializable {
      private String usuariosCpf;
      @Column(name = "USUARIOS_NOME", length = 60)
      private String usuariosNome;
-     @Column(name = "USUARIO_SENHA", length = 6)
+     @Column(name = "USUARIO_SENHA", length = 60)
      private String usuarioSenha;
      @Column(name = "USUARIO_ATIVO", columnDefinition = "BOOLEAN")
      private Boolean usuarioAtivo;

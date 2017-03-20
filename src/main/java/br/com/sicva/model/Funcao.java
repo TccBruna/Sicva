@@ -33,7 +33,7 @@ public class Funcao  implements java.io.Serializable {
     
    
      @Id
-     @Column(name="FUNCAO_DESCRICAO", unique=true, nullable=false, length=10)
+     @Column(name="FUNCAO_DESCRICAO", unique=true, nullable=false, length=20)
     public String getFuncaoDescricao() {
         return this.funcaoDescricao;
     }

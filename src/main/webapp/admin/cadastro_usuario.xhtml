@@ -1,4 +1,4 @@
-<ui:composition template="/user/template.xhtml"
+<ui:composition template="/atendente/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"                
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"                
                 xmlns:p="http://primefaces.org/ui"
@@ -50,27 +50,25 @@
                             <h:outputLabel for="inputcpf" value="CPF"
                                            styleClass="col-sm-3 control-label" />
                             <div class="col-sm-6">
-                                <h:inputText value="#{usuarioController.usuario.usuariosCpf}" class="form-control"
+                                <p:inputMask mask="999.999.999-99" value="#{usuarioController.usuario.usuariosCpf}" styleClass="form-control"
                                              id="inputcpf" required="true"
                                              pt:placeholder="Digite aqui seu usuário entre 6 e 20 caracteres"
                                              requiredMessage="é necessário que você informe seu usuário."
                                              validatorMessage="usuário deve conter entre 6 e 20 caracteres.">
                                     <f:validateLength minimum="6" maximum="20" />
                                     <f:ajax event="blur" render="m_inputcpf" />
-                                </h:inputText>
+                                </p:inputMask>
                                 <h:message id="m_inputcpf" for="inputcpf" style="color:#D74937;" />
                             </div>
                         </div>
-                      
+
                         <div class="form-group">
                             <h:outputLabel for="inputnome" value="Nome"
                                            styleClass="col-sm-3 control-label" />
                             <div class="col-sm-7">
-                                <h:inputText value="#{usuarioController.usuario.usuariosNome}" class="form-control"
-                                             id="inputnome"
+                                <h:inputText value="#{usuarioController.usuario.usuariosNome}" class="form-control" id="inputnome"
                                              pt:placeholder="Digite aqui seu primeiro nome entre 2 e 30 caracteres"
-                                             required="true"
-                                             validatorMessage="primeiro nome deve conter entre 2 e 30 caracteres."
+                                             required="true" validatorMessage="primeiro nome deve conter entre 2 e 30 caracteres."
                                              requiredMessage="é necessário que você informe seu primeiro nome.">
                                     <f:validateLength minimum="2" maximum="30" />
                                     <f:ajax event="blur" render="m_inputnome" />
@@ -79,8 +77,8 @@
                                            style="color:#D74937;" />
                             </div>
                         </div>
-                        
-                          <div class="form-group">
+
+                        <div class="form-group">
                             <h:outputLabel for="password" value="Senha"
                                            styleClass="col-sm-3 control-label" />
                             <div class="col-sm-6">
@@ -113,18 +111,29 @@
                                 <h:message id="m_confirm" for="confirmPassword" style="color:#D74937;" />
                             </div>
                         </div>
-                        
                         <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-10">
-                                <h:commandButton  action="#{usuarioController.salvar}" value="Salvar"
-                                                 styleClass="btn btn-default" />
+                            <h:outputLabel for="SelectFuncao" value="Funcção"
+                                           styleClass="col-sm-3 control-label" /> 
+                            <div class="col-sm-6">                                
+                                <h:selectOneMenu value="#{usuarioController.funcao.funcaoDescricao}"  required="true" requiredMessage="selecione uma função" styleClass="form-control"  id="SelectFuncao" >
+                                    <f:selectItem itemLabel="Selecione  a funcao" />
+                                    <f:selectItems  value="#{usuarioController.allFuncoes}" />                                    
+                                </h:selectOneMenu>
+                                <h:message  for="SelectFuncao" style="color:#D74937;" />
                             </div>
                         </div>
-                        
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-6">
+                                <h:commandButton  action="#{usuarioController.salvar}" value="Salvar"
+                                                  styleClass="btn btn-success  " />
+                            </div>
+                        </div>
+
                     </h:form>
-                </div>
+                </div>                
             </div>
         </div>
+        
     </ui:define>
 
 </ui:composition>

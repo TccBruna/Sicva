@@ -24,10 +24,9 @@ public class ConfirmPasswordValidator implements Validator {
         String password = (String) passwordComponent.getValue();
   
         String confirm = (String) value;
-        if(!password.equals("")){
+  
         if (!password.equals(confirm)) {
             throw new ValidatorException(new FacesMessage("Senhas não são iguais."));
-        }
         }
     }
 }
