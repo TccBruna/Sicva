@@ -16,5 +16,6 @@
     <mapping class="br.com.sicva.model.Ubs"/>
     <mapping class="br.com.sicva.model.Usuarios"/>
     <mapping class="br.com.sicva.model.Vacinas"/>      
+    <mapping class="br.com.sicva.model.Zona"/>      
   </session-factory>
 </hibernate-configuration>
