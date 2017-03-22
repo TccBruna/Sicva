@@ -7,7 +7,6 @@ package br.com.sicva.seguranca;
 
 import java.io.IOException;
 import java.util.Collection;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,7 +23,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  *
  * @author Mauricio
  */
-public class SimplesUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
+public class DirecionadorUsuario implements AuthenticationSuccessHandler{
 
     protected Log logger = LogFactory.getLog(this.getClass());
  
@@ -56,25 +55,31 @@ public class SimplesUrlAuthenticationSuccessHandler implements AuthenticationSuc
     }
  
     protected String determineTargetUrl(Authentication authentication) {
-        boolean isUser = false;
+        boolean isAtendente = false;
         boolean isAdmin = false;
+         boolean isEnfermeiro = false;
         Collection<? extends GrantedAuthority> authorities
          = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
-                isUser = true;
+            if (grantedAuthority.getAuthority().equals("ROLE_ATENDENTE")) {
+                isAtendente = true;
                 break;
             } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
                 isAdmin = true;
+                break;            
+            } else if (grantedAuthority.getAuthority().equals("ROLE_ENFERMEIRO")) {
+                isEnfermeiro = true;
                 break;
             }
         }
  
-        if (isUser) {
-            return "/user/index.xhtml";
+        if (isAtendente) {
+            return "/atendente/index.xhtml";
         } else if (isAdmin) {
             return "/admin/index.xhtml";
-        } else {
+        } else if (isEnfermeiro) {
+            return "/enfermeiro/index.xhtml";
+        }else {
             throw new IllegalStateException();
         }
     }

@@ -52,9 +52,7 @@ public class Pacientes  implements java.io.Serializable {
        
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-
-    
+    @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="PACIENTES_NUMERO_REGISTRO_NASCIMENTO", unique=true, nullable=false)
     public Integer getPacientesNumeroRegistroNascimento() {
         return this.pacientesNumeroRegistroNascimento;

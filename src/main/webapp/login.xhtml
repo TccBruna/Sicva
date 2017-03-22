@@ -59,13 +59,14 @@
                         <h2 class="form-heading">Log in</h2>
                         <div class="form-group #{param.error != null ? 'has-error' : ''}">                   
                             <div class="form-group">                                
-                                 <p:outputLabel for="j_username" value="CPF: " />
-                                    <p:inputMask id="j_username"  required="true" requiredMessage="Por Favor Preencha o campo CPF"
-                                                 styleClass="form-control"  mask="999.999.999-99"/>
-                          
+                                <p:outputLabel for="j_username" value="CPF: " />
+                                <p:inputMask id="j_username" placeholder="Digite o CPF"  required="true" requiredMessage="Por Favor Preencha o campo CPF"
+                                             styleClass="form-control"  mask="999.999.999-99"/>
+
                                 <p:message for="j_username"/>
                             </div>
-                                     <div class="form-group">
+                            <div class="form-group">
+                                <p:outputLabel for="j_password" value="Senha: " />
                                 <p:password id="j_password" immediate="true"  required="true" requiredMessage="Por Favor Preencha o campo da senha"
                                             placeholder="Senha" styleClass="form-control"  >                                    
                                 </p:password>                            
@@ -77,7 +78,7 @@
                         <div class="checkbox">
                             <label><input type="checkbox" value="" id="remember-me" name="remember-me"/>Lembrar a Senha</label>
                         </div>
-                        
+
                     </form>
 
                 </div>

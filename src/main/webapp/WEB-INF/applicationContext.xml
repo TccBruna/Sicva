@@ -7,16 +7,17 @@
                             http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/atendente/**" access="ROLE_ATENDENTE" />
+        <intercept-url pattern="/atendente/**" access="ROLE_ATENDENTE,ROLE_ADMIN" />
         <intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+        <intercept-url pattern="/enfermeiro/**" access="ROLE_ENFERMEIRO,ROLE_ADMIN" />
         <form-login login-page="/login.xhtml"                   
                             authentication-failure-url="/login.xhtml?error=true"
-                            authentication-success-handler-ref="SimplesUrlAuthenticationSuccessHandler"/>
+                            authentication-success-handler-ref="DirecionadorUsuario"/>
         
     </http>
     
-    <b:bean id="SimplesUrlAuthenticationSuccessHandler"
-                class="br.com.sicva.seguranca.SimplesUrlAuthenticationSuccessHandler" />
+    <b:bean id="DirecionadorUsuario"
+                class="br.com.sicva.seguranca.DirecionadorUsuario" />
         
    
     <authentication-manager>

@@ -9,6 +9,8 @@ import br.com.sicva.connection.HibernateUtil;
 import br.com.sicva.model.Usuarios;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -48,6 +50,8 @@ public class UsuariosDao {
         } catch (Exception e) {
             System.out.println("Erro no Banco!" + e.getMessage());
             tx.rollback();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+                 "Ocorreu um erro","infelizmente o usuario não pode ser salvo."));
             return false;
         }
     }

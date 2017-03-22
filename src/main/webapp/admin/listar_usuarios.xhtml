@@ -44,13 +44,15 @@
             <div class="row"> 
                 <div class="col-xs-12">                
                     <div class="page-header"> <h1>Listar Usuários  <small>descrição</small> </h1></div> 
+                    <h:form id="frmUsuario">
+                        <p:dataTable   var="user" value="#{usuarioController.usuarios}"
+                                       emptyMessage="Nenhum registro encontrado..."
+                                       widgetVar="UsuariosTable"  
+                                       styleClass="table table-striped" 
+                                       paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                       rowKey="#{user.usuariosCpf}" selectionMode="single"                               
+                                       paginator="true" rows="10" rowsPerPageTemplate="5,10,15">
 
-                    <p:dataTable   var="user" value="#{usuarioController.usuarios}"
-                                emptyMessage="Nenhum registro encontrado..."
-                                widgetVar="UsuariosTable"                                   
-                                rowKey="#{user.usuariosCpf}" selectionMode="single"                               
-                                paginator="true" rows="10" rowsPerPageTemplate="5,10,15">
- 
                             <f:facet name="header"> 
                                 <p:outputPanel> 
                                     <div style="text-align: left; float: left">                                   
@@ -58,22 +60,50 @@
                                         <p:inputText id="globalFilter" onkeyup="PF('UsuariosTable').filter();" style="width:150px" /> 
                                     </div>
                                     <div style="text-align: right; float: right">                                   
-                                        <p:commandButton value="Novo" image="ui-icon-document" title="Novo cliente">                                                   
-                                            <f:setPropertyActionListener target="#{clienteController.addNewReg}" value="true" />
-                                            <f:setPropertyActionListener target="#{clienteController.cliente}" value="#{null}" />
+                                        <p:commandButton value="Novo" icon="ui-icon-document" action="cadastro_usuario?faces-redirect=true" title="Novo cliente">                                                   
                                         </p:commandButton>
                                     </div>                               
                                 </p:outputPanel> 
                             </f:facet>    
-                        <p:column headerText="Nome" filterBy="#{user.usuariosNome}" filterStyle="display: none">
-                            <h:outputText value="#{user.usuariosNome}" />
-                        </p:column>
+                            <p:column headerText="Nome" filterBy="#{user.usuariosNome}" filterStyle="display: none">
+                                <h:outputText value="#{user.usuariosNome}" />
+                            </p:column>
 
-                        <p:column headerText="Cpf" filterBy="#{user.usuariosCpf}" filterStyle="display: none">
-                            <h:outputText value="#{user.usuariosCpf}" />
-                        </p:column>
-                        
-                    </p:dataTable>
+                            <p:column headerText="Cpf" filterBy="#{user.usuariosCpf}" filterStyle="display: none">
+                                <h:outputText value="#{user.usuariosCpf}" />
+                            </p:column>
+
+                            <p:column headerText="Status" filterBy="#{user.usuarioAtivo}" filterStyle="display: none">
+                                <h:outputText value="#{user.usuarioAtivo}" />
+                            </p:column>
+                            <p:column headerText="Alterar">
+                                <p:commandButton value="Desabilitar Usuario" icon="ui-icon-pencil" title="Desabilitar Usuário"
+                                                 
+                                                 update=":frmUsuario">                                   
+                                         </p:commandButton>                               
+                            </p:column> 
+                           
+                               <f:facet name="footer">
+                                <div style="text-align: left; float: left">
+                                    <p:ajaxStatus id="ajaxStatusPanel"> 
+                                        <f:facet name="start"> 
+                                            <div style="background-color: white; color: black; vertical-align: middle">
+                                                Carregando...
+                                            </div>
+                                        </f:facet>
+                                        <f:facet name="complete"> 
+                                            <h:outputText value="" /> 
+                                        </f:facet> 
+                                    </p:ajaxStatus>
+                                </div>
+                                <div style="color:blue ;text-align: right; float: right">                                   
+                                    <h:outputLabel value="Quantidade: " />
+                                    <h:outputText value=""/>
+                                </div>                                                      
+                            </f:facet>                                                 
+                           
+                        </p:dataTable>
+                    </h:form>
                 </div>  
             </div>
         </div>

@@ -45,8 +45,9 @@
                 <div class="col-md-8">
                     <h1>Cadastrar Usuarios!</h1>        
                     <br />
-                    <h:messages id="msg" rendered="false" class="alert alert-success"/>
-                    <h:form  class="form-horizontal" pt:role="form">            
+                    
+                    <h:form  class="form-horizontal" pt:role="form">
+                        
                         <div class="form-group">
                             <h:outputLabel for="inputcpf" value="CPF"
                                            styleClass="col-sm-3 control-label" />
@@ -125,12 +126,16 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
-                                <h:commandButton  action="#{usuarioController.salvar}" value="Salvar"
-                                                  styleClass="btn btn-success  btn-block " />
+                                <h:commandButton   action="#{usuarioController.salvar}" value="Salvar"
+                                                   styleClass="btn btn-success  btn-block " >
+                                    
+                                </h:commandButton>
+                                
                             </div>
                         </div>
 
                     </h:form>
+                    
                 </div> 
                 <div class="col-sm-4">
                     <h1>Opção</h1>
