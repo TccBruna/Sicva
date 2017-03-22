@@ -57,13 +57,15 @@
                 <h:form  class="form-horizontal" pt:role="form"> 
                     <div class="form-group">                            
                         <h:outputLabel for="inptRegistro" class="control-label col-sm-3" value="N° do Registro Geral" />                            
-                        <div class="col-sm-6">                            
+                        <div class="col-sm-5">                            
                             <h:inputText value="#{pacienteController.pacienteDigitado.pacientesNumeroRegistroNascimento}" class="form-control" id="inptRegistro"
                                          pt:placeholder="Digite o numero do registro"                                    
-                                         required="true" onblur="rc()" converterMessage="Por favor inserir somente numeros"
+                                         required="true"  converterMessage="Por favor inserir somente numeros"
                                          requiredMessage="Digite o numero do registro de nascimento.">                                   
-                            </h:inputText>
-                            <p:remoteCommand name="rc" update=":formCadPaciente" actionListener="#{pacienteController.consultarPacientes}" />
+                            </h:inputText>                            
+                        </div>
+                        <div class="col-sm-2">
+                           <h:commandButton styleClass="btn btn-default " value="Pesquisar"   actionListener="#{pacienteController.consultarPacientes}" /> 
                         </div>
                     </div> 
                 </h:form>
