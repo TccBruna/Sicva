@@ -30,9 +30,10 @@ public class PacienteController {
     private PacientesDao pacientesDao;
     private Enderecos endereco;
     private EnderecosDao enderecosDao;
-    private boolean renderSalvar ;
-    private boolean renderAlterar ;
-    
+    private boolean disableSalvar = true;
+    private boolean disableAlterar = true;
+    private boolean HabilitarAlterar = true;
+    private boolean disableCampos = true;
 
     public Pacientes getPaciente() {
         if (this.paciente == null) {
@@ -41,8 +42,8 @@ public class PacienteController {
         return paciente;
     }
 
-    public void setPaciente(Pacientes paciente) {       
-            this.paciente = paciente;        
+    public void setPaciente(Pacientes paciente) {
+        this.paciente = paciente;
     }
 
     public Pacientes getPacienteDigitado() {
@@ -52,31 +53,45 @@ public class PacienteController {
         return pacienteDigitado;
     }
 
-    public void setPacienteDigitado(Pacientes pacienteDigitado) {         
-            this.pacienteDigitado = pacienteDigitado;
-      
+    public void setPacienteDigitado(Pacientes pacienteDigitado) {
+        this.pacienteDigitado = pacienteDigitado;
+
     }
 
-    public boolean isRenderSalvar() {
-        return renderSalvar;
+    public boolean isDisableSalvar() {
+        return disableSalvar;
     }
 
-    public void setRenderSalvar(boolean renderSalvar) {
-        this.renderSalvar = renderSalvar;
+    public void setDisableSalvar(boolean disableSalvar) {
+        this.disableSalvar = disableSalvar;
     }
 
-    public boolean isRenderAlterar() {
-        return renderAlterar;
+    public boolean isDisableAlterar() {
+        return disableAlterar;
     }
 
-    public void setRenderAlterar(boolean renderAlterar) {
-        this.renderAlterar = renderAlterar;
+    public void setDisableAlterar(boolean disableAlterar) {
+        this.disableAlterar = disableAlterar;
     }
 
-    
+    public boolean isHabilitarAlterar() {
+        return HabilitarAlterar;
+    }
+
+    public void setHabilitarAlterar(boolean HabilitarAlterar) {
+        this.HabilitarAlterar = HabilitarAlterar;
+    }
+
+    public boolean isDisableCampos() {
+        return disableCampos;
+    }
+
+    public void setDisableCampos(boolean disableCampos) {
+        this.disableCampos = disableCampos;
+    }
 
     public Enderecos getEndereco() {
-        if(endereco == null){
+        if (endereco == null) {
             endereco = new Enderecos();
         }
         return endereco;
@@ -90,32 +105,44 @@ public class PacienteController {
         try {
             pacientesDao = new PacientesDao();
             enderecosDao = new EnderecosDao();
-            paciente = pacientesDao.listarPorRegistro(this.pacienteDigitado.getPacientesNumeroRegistroNascimento());                           
+            paciente = pacientesDao.listarPorRegistro(this.pacienteDigitado.getPacientesNumeroRegistroNascimento());
             if (paciente == null) {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_WARN, "Registro não cadastrado!", null));
-                renderSalvar = true;
-                renderAlterar = false;
-                endereco = null;                
+                disableSalvar = false;
+                HabilitarAlterar = true;
+                disableCampos = false;
+                disableAlterar = true;
+                endereco = null;
             } else {
-                endereco = enderecosDao.consultarPorParciente(pacienteDigitado.getPacientesNumeroRegistroNascimento());          
-                renderAlterar = true;
-                renderSalvar = false; 
+                endereco = enderecosDao.consultarPorParciente(pacienteDigitado.getPacientesNumeroRegistroNascimento());
+                HabilitarAlterar = false;
+                disableSalvar = true;
+                disableCampos = true;
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Este Registro já esta cadastrado", null));
             }
         } catch (Exception e) {
-             System.out.println(e);
+            System.out.println(e);
         }
+    }
+
+   public void HabilitarCampos(ActionEvent event) {
+     this.disableCampos = false;
+     this.disableAlterar = false;
     }
 
     public void Salvar(ActionEvent event) {
         try {
             pacientesDao = new PacientesDao();
             enderecosDao = new EnderecosDao();
-            enderecosDao.salvarEnderecos(endereco);    
+            enderecosDao.salvarEnderecos(endereco);
             this.paciente.setEnderecos(endereco);
+            this.paciente.setPacientesNumeroRegistroNascimento(pacienteDigitado.getPacientesNumeroRegistroNascimento());
             pacientesDao.salvarPacientes(paciente);
+            paciente = new Pacientes();
+            endereco = new Enderecos();
+            pacienteDigitado = new Pacientes();
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso", null));
         } catch (RuntimeException e) {
@@ -123,15 +150,24 @@ public class PacienteController {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aconteceu um erro ao salvar", null));
         }
+          disableSalvar = true;
+          disableAlterar = true;
+          HabilitarAlterar = true;
+          disableCampos = true;
 
     }
-    public void Alterar(){
+
+    public void Alterar() {
         try {
             pacientesDao = new PacientesDao();
             enderecosDao = new EnderecosDao();
-            enderecosDao.salvarEnderecos(endereco);    
+            enderecosDao.salvarEnderecos(endereco);
             this.paciente.setEnderecos(endereco);
+            this.paciente.setPacientesNumeroRegistroNascimento(pacienteDigitado.getPacientesNumeroRegistroNascimento());
             pacientesDao.alterarPacientes(paciente);
+            paciente = new Pacientes();
+            endereco = new Enderecos();
+            pacienteDigitado = new Pacientes();
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "alterdado com sucesso", null));
         } catch (RuntimeException e) {
@@ -139,5 +175,9 @@ public class PacienteController {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aconteceu um erro ao alterar", null));
         }
+          disableSalvar = true;
+          disableAlterar = true;
+          HabilitarAlterar = true;
+          disableCampos = true;
     }
 }

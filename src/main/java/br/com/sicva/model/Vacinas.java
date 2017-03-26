@@ -35,9 +35,7 @@ public class Vacinas  implements java.io.Serializable {
        
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-
-    
+     @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="VACINAS_CODIGO", unique=true, nullable=false)
     public Integer getVacinasCodigo() {
         return this.vacinasCodigo;

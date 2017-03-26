@@ -15,7 +15,7 @@ import org.hibernate.Transaction;
 
 /**
  *
- * @author Mauricio
+ * @author Rodrigo
  */
 public class PacientesDao {
 
@@ -70,8 +70,7 @@ public class PacientesDao {
     public List<Pacientes> listarPacientes() {
         session = new HibernateUtil().getSessionFactory().openSession();
         Query query = session.createSQLQuery("select*from paciente order by clicod desc ").addEntity(Pacientes.class);
-        listarPacientes = query.list();
-        listarPacientes = session.createCriteria(Pacientes.class).list();
+        listarPacientes = query.list();        
         session.close();
         return listarPacientes;
     }

@@ -35,7 +35,6 @@ public class Pacientes  implements java.io.Serializable {
 
     public Pacientes() {
     }
-
 	
     public Pacientes(String pacientesCpf) {
         this.pacientesCpf = pacientesCpf;

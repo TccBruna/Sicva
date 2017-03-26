@@ -1,0 +1,43 @@
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="titulo">Gerenciar Vacinas</ui:define>
+    
+    <ui:define name="menu">
+        <ui:include src="menu_admin.xhtml" />
+    </ui:define> 
+        <ui:define name="corpo">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="page-header"><h1>Vacinas</h1></div>
+                        <div class="col-sm-6">
+                            <p:messages autoUpdate="true" closable="true"/>
+                        <h:form class="form-horizontal" pt:role="form">
+                            <div class="form-group">
+                                <p:outputLabel for="inpVacinaNome" styleClass="col-sm-3 control-label"  value="Nome"/>
+                                <div class="col-sm-9 ">
+                                    <p:inputText value="#{vacinaController.vacina.vacinasDescricao}" required="true" 
+                                                 requiredMessage="por favor digite o nome da vacina"
+                                                 styleClass="form-control" placeholder="Digite o nome da vacina"  id="inpVacinaNome"
+                                                 validatorMessage="O Nome da vacina deve conter entre 10 e 30 caracteres.">
+                                        <f:validateLength minimum="10" maximum="30" />
+                                    </p:inputText>
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-3  text-right">
+                                <h:commandButton action="#{vacinaController.Salvar}" class="btn btn-success btn-block" value="Salvar"></h:commandButton>
+                            </div>
+                        </h:form>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </ui:define>
+
+</ui:composition>

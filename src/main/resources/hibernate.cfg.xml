@@ -9,6 +9,7 @@
     <property name="hibernate.connection.password">123</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="br.com.sicva.model.Funcao"/>
     <mapping class="br.com.sicva.model.RegistrosVacinas"/>
     <mapping class="br.com.sicva.model.Ubs"/>

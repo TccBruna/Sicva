@@ -32,6 +32,8 @@ public class UsuarioController {
     private UsuariosDao usuariosDao;
     private Funcao funcao;
     private boolean showMsgErros;
+    
+    
 
     public UsuarioController() {
         funcao = new Funcao();

@@ -1,4 +1,4 @@
-<ui:composition template="/atendente/template.xhtml"
+<ui:composition template="/template/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"                
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"                
                 xmlns:p="http://primefaces.org/ui"
@@ -9,36 +9,9 @@
     <ui:define name="titulo">Cadastrar Pacientes</ui:define>
 
     <ui:define name="menu">
-        <!--Menu da Aplicação  -->
-        <nav  class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-navegacao">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Logomarca</a>
-                </div>
-                <div class="collapse navbar-collapse menu-navegacao" id="menu-navegacao">
-                    <ul class="nav navbar-nav navbar-right ">
-                        <li><a class="scrollSuave" href="index.xhtml">Início</a></li>
-                        <li><a class="scrollSuave" href="cadastrar_pacientes.xhtml">Cadastrar Pacientes</a></li>                                           
-                        <li><form method="post" class="navbar-form navbar-right"
-                                  action="../j_spring_security_logout">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                <button type="submit" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-log-out"></span> 
-                                    Sair
-                                </button>
-                            </form></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+       <ui:include src="menu_atendente.xhtml"/>
     </ui:define>
-    <!--// Menu da Aplicação  -->
-
+    
     <ui:define name="corpo">
         <div class="container">
             <div class="row">                
@@ -46,11 +19,13 @@
                 <p:messages id="messages"  autoUpdate="true" closable="true" /> 
 
                 <p:ajaxStatus onstart="$('#myModal').modal('show')" onsuccess="$('#myModal').modal('hide')" />
-                <div id="myModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                <div id="myModal" class="modal fade" style="padding-top: 100px;" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
                     <div class="modal-dialog modal-sm" role="document">
                         <div class="modal-content">
-                            <img src="../resources/imgs/search.gif" />
-                            Pesquisando....
+                            <div class="text-center">
+                                <div><img src="../resources/imgs/search.gif" class="img-responsive"/></div>
+                                <h4>Pesquisando....</h4> 
+                            </div>   
                         </div>
                     </div>
                 </div>               
@@ -65,93 +40,119 @@
                             </h:inputText>                            
                         </div>
                         <div class="col-sm-2">
-                           <h:commandButton styleClass="btn btn-default " value="Pesquisar"   actionListener="#{pacienteController.consultarPacientes}" /> 
+                            <p:commandButton update="formCadPaciente" styleClass="btn btn-default " value="Pesquisar"   actionListener="#{pacienteController.consultarPacientes}" /> 
                         </div>
                     </div> 
                 </h:form>
 
                 <h:form id="formCadPaciente" class="form-horizontal" pt:role="form">                    
                     <div class="col-md-6">
-                        <p:panel header="Dados do Paciente">
+                        
                             <div class="form-group">
                                 <h:outputLabel class="control-label col-sm-3" value="N° de Registro"/>
                                 <div class="col-sm-6">
-                                    <h:inputText class="form-control"  required="true" value="#{pacienteController.paciente.pacientesNumeroRegistroNascimento}" />
+                                    <h:inputText class="form-control"  readonly="true" required="true" 
+                                                 value="#{pacienteController.pacienteDigitado.pacientesNumeroRegistroNascimento}"/>
+                                                 
                                 </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel class="control-label col-sm-3" value="CPF"/>
                                 <div class="col-sm-6">
-                                    <h:inputText class="form-control"  required="true" value="#{pacienteController.paciente.pacientesCpf}" />
+                                    <h:inputText class="form-control"  required="true"
+                                                 value="#{pacienteController.paciente.pacientesCpf}"
+                                                 readonly="#{pacienteController.disableCampos}"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel class="control-label col-sm-3" value="Nome"/>
                                 <div class="col-sm-9">
-                                    <h:inputText class="form-control"  required="true" value="#{pacienteController.paciente.pacientesNome}"  />
+                                    <h:inputText class="form-control"  required="true" 
+                                                 value="#{pacienteController.paciente.pacientesNome}" 
+                                                 readonly="#{pacienteController.disableCampos}"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel class="control-label col-sm-3" value="Data de Nascimento"/>
                                 <div class="col-sm-6">
-                                    <h:inputText class="form-control"  required="true" value="#{pacienteController.paciente.pacientesDataNascimento}" />
+                                    <h:inputText class="form-control"  required="true" 
+                                                 value="#{pacienteController.paciente.pacientesDataNascimento}" 
+                                                 readonly="#{pacienteController.disableCampos}"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel class="control-label col-sm-3" value="Nome do Responsavel"/>
                                 <div class="col-sm-6">
-                                    <h:inputText class="form-control"  required="true" value="#{pacienteController.paciente.pacientesNomeResponsavel}" />
+                                    <h:inputText class="form-control"  required="true" 
+                                                 value="#{pacienteController.paciente.pacientesNomeResponsavel}" 
+                                                 readonly="#{pacienteController.disableCampos}"/>
                                 </div>
                             </div>                                          
 
-                        </p:panel>
+                        
                     </div> 
                     <div class="col-sm-6">  
-                        <p:panel header="Telefones e Endereço">
+                        
                             <div class="form-group">
                                 <h:outputLabel class="control-label col-sm-3" value="Telefone Fixo"/>
                                 <div class="col-sm-6">
-                                    <h:inputText class="form-control"  required="true" value="#{pacienteController.paciente.pacientesFone1}" />
+                                    <h:inputText class="form-control"  required="true" 
+                                                 value="#{pacienteController.paciente.pacientesFone1}" 
+                                                 readonly="#{pacienteController.disableCampos}"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel class="control-label col-sm-3" value="Celular"/>
                                 <div class="col-sm-6">
-                                    <h:inputText class="form-control"  required="true" value="#{pacienteController.paciente.pacientesFone2}"/>
+                                    <h:inputText class="form-control"  required="true" 
+                                                 value="#{pacienteController.paciente.pacientesFone2}"
+                                                 readonly="#{pacienteController.disableCampos}"/>
                                 </div>
                             </div>   
                             <div class="form-group">
                                 <h:outputLabel class="control-label col-sm-3" value="Rua"/>
                                 <div class="col-sm-9">
-                                    <h:inputText class="form-control" required="true" value="#{pacienteController.endereco.enderecoRua}" />
+                                    <h:inputText class="form-control" required="true" 
+                                                 value="#{pacienteController.endereco.enderecoRua}" 
+                                                 readonly="#{pacienteController.disableCampos}"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel class="control-label col-sm-3" value="Cep"/>
                                 <div class="col-sm-4">
-                                    <h:inputText class="form-control"  required="true" value="#{pacienteController.endereco.enderecoCep}"  />
+                                    <h:inputText class="form-control"  required="true" 
+                                                 value="#{pacienteController.endereco.enderecoCep}"  
+                                                 readonly="#{pacienteController.disableCampos}"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel class="control-label col-sm-3" value="Numero"/>
                                 <div class="col-sm-6">
-                                    <h:inputText class="form-control"  required="true" value="#{pacienteController.endereco.enderecoNumero}" />
+                                    <h:inputText class="form-control"  required="true" 
+                                                 value="#{pacienteController.endereco.enderecoNumero}" 
+                                                 readonly="#{pacienteController.disableCampos}"/>
                                 </div>
                             </div>                            
-                        </p:panel>
-
-
+                        
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group ">
-               
-                            <div class="col-sm-3  col-sm-offset-6">
-                                <h:commandButton class="btn btn-default btn-block" actionListener="#{pacienteController.Alterar}" rendered="#{pacienteController.renderAlterar}" value="Alterar">
+                            <div class="col-sm-3  ">
+                                <h:commandButton styleClass="btn btn-default btn-block" 
+                                                 actionListener="#{pacienteController.HabilitarCampos}" 
+                                                 disabled="#{pacienteController.habilitarAlterar}" value="Habilitar Alteração"
+                                                 type="button">
+                                    <f:ajax event="click" render="@form"/>
+                                </h:commandButton>
+                            </div> 
+
+                            <div class="col-sm-3  col-sm-offset-3">
+                                <h:commandButton class="btn btn-default btn-block" actionListener="#{pacienteController.Alterar}" disabled="#{pacienteController.disableAlterar}" value="Alterar">
 
                                 </h:commandButton>
                             </div> 
                             <div class="col-sm-3">
-                                <h:commandButton id="btnSalvar" rendered="#{pacienteController.renderSalvar}" actionListener="#{pacienteController.Salvar}"  class="btn btn-default btn-block" value="Salvar">
+                                <h:commandButton id="btnSalvar"  actionListener="#{pacienteController.Salvar}" disabled="#{pacienteController.disableSalvar}"  class="btn btn-default btn-block" value="Salvar">
 
                                 </h:commandButton>
                             </div>
