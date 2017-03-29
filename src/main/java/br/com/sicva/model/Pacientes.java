@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 16/03/2017 15:37:02 by Hibernate Tools 4.3.1
+// Generated 28/03/2017 16:05:59 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -24,34 +24,33 @@ public class Pacientes  implements java.io.Serializable {
 
      private Integer pacientesNumeroRegistroNascimento;
      private Enderecos enderecos;
-     private Usuarios usuarios;
      private String pacientesCpf;
-     private String pacientesNome;
      private String pacientesDataNascimento;
-     private String pacientesNomeResponsavel;
      private String pacientesFone1;
      private String pacientesFone2;
-     
+     private String pacientesNome;
+     private String pacientesNomeResponsavel;
 
     public Pacientes() {
     }
+
 	
     public Pacientes(String pacientesCpf) {
         this.pacientesCpf = pacientesCpf;
     }
-    public Pacientes(Enderecos enderecos, Usuarios usuarios, String pacientesCpf, String pacientesNome, String pacientesDataNascimento, String pacientesNomeResponsavel, String pacientesFone1, String pacientesFone2) {
+    public Pacientes(Enderecos enderecos, String pacientesCpf, String pacientesDataNascimento, String pacientesFone1, String pacientesFone2, String pacientesNome, String pacientesNomeResponsavel) {
        this.enderecos = enderecos;
-       this.usuarios = usuarios;
        this.pacientesCpf = pacientesCpf;
-       this.pacientesNome = pacientesNome;
        this.pacientesDataNascimento = pacientesDataNascimento;
-       this.pacientesNomeResponsavel = pacientesNomeResponsavel;
        this.pacientesFone1 = pacientesFone1;
        this.pacientesFone2 = pacientesFone2;
-       
+       this.pacientesNome = pacientesNome;
+       this.pacientesNomeResponsavel = pacientesNomeResponsavel;
     }
    
-    @Id @GeneratedValue(strategy=IDENTITY)    
+     @Id @GeneratedValue(strategy=IDENTITY)
+
+    
     @Column(name="PACIENTES_NUMERO_REGISTRO_NASCIMENTO", unique=true, nullable=false)
     public Integer getPacientesNumeroRegistroNascimento() {
         return this.pacientesNumeroRegistroNascimento;
@@ -71,16 +70,6 @@ public class Pacientes  implements java.io.Serializable {
         this.enderecos = enderecos;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="PACIENTES_USUARIO_CPF")
-    public Usuarios getUsuarios() {
-        return this.usuarios;
-    }
-    
-    public void setUsuarios(Usuarios usuarios) {
-        this.usuarios = usuarios;
-    }
-
     
     @Column(name="PACIENTES_CPF", nullable=false, length=14)
     public String getPacientesCpf() {
@@ -92,16 +81,6 @@ public class Pacientes  implements java.io.Serializable {
     }
 
     
-    @Column(name="PACIENTES_NOME", length=50)
-    public String getPacientesNome() {
-        return this.pacientesNome;
-    }
-    
-    public void setPacientesNome(String pacientesNome) {
-        this.pacientesNome = pacientesNome;
-    }
-
-    
     @Column(name="PACIENTES_DATA_NASCIMENTO", length=10)
     public String getPacientesDataNascimento() {
         return this.pacientesDataNascimento;
@@ -109,16 +88,6 @@ public class Pacientes  implements java.io.Serializable {
     
     public void setPacientesDataNascimento(String pacientesDataNascimento) {
         this.pacientesDataNascimento = pacientesDataNascimento;
-    }
-
-    
-    @Column(name="PACIENTES_NOME_RESPONSAVEL", length=60)
-    public String getPacientesNomeResponsavel() {
-        return this.pacientesNomeResponsavel;
-    }
-    
-    public void setPacientesNomeResponsavel(String pacientesNomeResponsavel) {
-        this.pacientesNomeResponsavel = pacientesNomeResponsavel;
     }
 
     
@@ -141,8 +110,26 @@ public class Pacientes  implements java.io.Serializable {
         this.pacientesFone2 = pacientesFone2;
     }
 
+    
+    @Column(name="PACIENTES_NOME", length=50)
+    public String getPacientesNome() {
+        return this.pacientesNome;
+    }
+    
+    public void setPacientesNome(String pacientesNome) {
+        this.pacientesNome = pacientesNome;
+    }
 
     
+    @Column(name="PACIENTES_NOME_RESPONSAVEL", length=60)
+    public String getPacientesNomeResponsavel() {
+        return this.pacientesNomeResponsavel;
+    }
+    
+    public void setPacientesNomeResponsavel(String pacientesNomeResponsavel) {
+        this.pacientesNomeResponsavel = pacientesNomeResponsavel;
+    }
+
 
 
 

@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 16/03/2017 15:37:02 by Hibernate Tools 4.3.1
+// Generated 28/03/2017 16:05:59 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -25,68 +25,68 @@ import javax.persistence.TemporalType;
 public class RegistrosVacinas  implements java.io.Serializable {
 
 
-     private Integer registrosId;
-     private CarteirasVacinas carteirasVacinas;
-     private ItensVacinas itensVacinas;
+     private int registrosId;
      private Pacientes pacientes;
+     private Date registrosDataAplicacaoVacina;
+     private String registrosLoteVacinas;
      private Ubs ubs;
      private Usuarios usuarios;
-     private String registrosLoteVacinas;
-     private Date registrosDataAplicacaoVacina;
 
     public RegistrosVacinas() {
     }
 
-    public RegistrosVacinas(CarteirasVacinas carteirasVacinas, ItensVacinas itensVacinas, Pacientes pacientes, Ubs ubs, Usuarios usuarios, String registrosLoteVacinas, Date registrosDataAplicacaoVacina) {
-       this.carteirasVacinas = carteirasVacinas;
-       this.itensVacinas = itensVacinas;
+	
+    public RegistrosVacinas(int registrosId, Pacientes pacientes) {
+        this.registrosId = registrosId;
+        this.pacientes = pacientes;
+    }
+    public RegistrosVacinas(int registrosId, Pacientes pacientes, Date registrosDataAplicacaoVacina, String registrosLoteVacinas, Ubs ubs, Usuarios usuarios) {
+       this.registrosId = registrosId;
        this.pacientes = pacientes;
+       this.registrosDataAplicacaoVacina = registrosDataAplicacaoVacina;
+       this.registrosLoteVacinas = registrosLoteVacinas;
        this.ubs = ubs;
        this.usuarios = usuarios;
-       this.registrosLoteVacinas = registrosLoteVacinas;
-       this.registrosDataAplicacaoVacina = registrosDataAplicacaoVacina;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
-
-    
     @Column(name="REGISTROS_ID", unique=true, nullable=false)
-    public Integer getRegistrosId() {
+    public int getRegistrosId() {
         return this.registrosId;
     }
     
-    public void setRegistrosId(Integer registrosId) {
+    public void setRegistrosId(int registrosId) {
         this.registrosId = registrosId;
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="REGISTROS_CARTEIRAS_ID")
-    public CarteirasVacinas getCarteirasVacinas() {
-        return this.carteirasVacinas;
-    }
-    
-    public void setCarteirasVacinas(CarteirasVacinas carteirasVacinas) {
-        this.carteirasVacinas = carteirasVacinas;
-    }
-
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="REGISTROS_ITENS_VACINAS_CODIGO")
-    public ItensVacinas getItensVacinas() {
-        return this.itensVacinas;
-    }
-    
-    public void setItensVacinas(ItensVacinas itensVacinas) {
-        this.itensVacinas = itensVacinas;
-    }
-
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="REGISTROS_PACIENTES_NUMERO_REGISTRO_NASCIMENTO")
+    @JoinColumn(name="REGISTROS_PACIENTES_NUMERO_REGISTRO_NASCIMENTO", nullable=false)
     public Pacientes getPacientes() {
         return this.pacientes;
     }
     
     public void setPacientes(Pacientes pacientes) {
         this.pacientes = pacientes;
+    }
+
+    @Temporal(TemporalType.DATE)
+    @Column(name="REGISTROS_DATA_APLICACAO_VACINA", length=10)
+    public Date getRegistrosDataAplicacaoVacina() {
+        return this.registrosDataAplicacaoVacina;
+    }
+    
+    public void setRegistrosDataAplicacaoVacina(Date registrosDataAplicacaoVacina) {
+        this.registrosDataAplicacaoVacina = registrosDataAplicacaoVacina;
+    }
+
+    
+    @Column(name="REGISTROS_LOTE_VACINAS", length=8)
+    public String getRegistrosLoteVacinas() {
+        return this.registrosLoteVacinas;
+    }
+    
+    public void setRegistrosLoteVacinas(String registrosLoteVacinas) {
+        this.registrosLoteVacinas = registrosLoteVacinas;
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
@@ -107,26 +107,6 @@ public class RegistrosVacinas  implements java.io.Serializable {
     
     public void setUsuarios(Usuarios usuarios) {
         this.usuarios = usuarios;
-    }
-
-    
-    @Column(name="REGISTROS_LOTE_VACINAS", length=8)
-    public String getRegistrosLoteVacinas() {
-        return this.registrosLoteVacinas;
-    }
-    
-    public void setRegistrosLoteVacinas(String registrosLoteVacinas) {
-        this.registrosLoteVacinas = registrosLoteVacinas;
-    }
-
-    @Temporal(TemporalType.DATE)
-    @Column(name="REGISTROS_DATA_APLICACAO_VACINA", length=10)
-    public Date getRegistrosDataAplicacaoVacina() {
-        return this.registrosDataAplicacaoVacina;
-    }
-    
-    public void setRegistrosDataAplicacaoVacina(Date registrosDataAplicacaoVacina) {
-        this.registrosDataAplicacaoVacina = registrosDataAplicacaoVacina;
     }
 
 

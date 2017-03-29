@@ -1,16 +1,12 @@
 package br.com.sicva.model;
-// Generated 16/03/2017 15:37:02 by Hibernate Tools 4.3.1
+// Generated 28/03/2017 16:05:59 by Hibernate Tools 4.3.1
 
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -26,16 +22,14 @@ public class Vacinas  implements java.io.Serializable {
      private Integer vacinasCodigo;
      private String vacinasDescricao;
      
-
     public Vacinas() {
     }
 
     public Vacinas(String vacinasDescricao) {
        this.vacinasDescricao = vacinasDescricao;
-       
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)    
+    @Id @GeneratedValue(strategy=IDENTITY)
     @Column(name="VACINAS_CODIGO", unique=true, nullable=false)
     public Integer getVacinasCodigo() {
         return this.vacinasCodigo;
@@ -55,9 +49,9 @@ public class Vacinas  implements java.io.Serializable {
         this.vacinasDescricao = vacinasDescricao;
     }
 
-
-   
-
+    
+    
+    
 }
 
 

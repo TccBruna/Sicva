@@ -12,21 +12,32 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Logomarca</a>
+                <a class="navbar-brand" href="#" style="padding-top: 0px">
+                    <img  class="img-responsive img-thumbnail" style="width: 100%; height: 100%" 
+                          src="../resources/imgs/logo/logo_original.png"/></a>
             </div>
             <div class="collapse navbar-collapse menu-navegacao" id="menu-navegacao">
                 <ul class="nav navbar-nav navbar-right ">
                     <li><a class="scrollSuave" href="index.xhtml">Início</a></li>
-                    <li><a class="scrollSuave" href="cadastro_usuario.xhtml">Usuario</a></li>                     
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                           aria-haspopup="true" aria-expanded="false">Usuario <span class="caret"></span></a>
+                        <ul class="dropdown-menu text-center">
+                            <li><a href="cadastro_usuario.xhtml">Cadastro</a></li>
+                            <li><a href="alterar_usuario.xhtml">Alterar</a></li>
+                            <li><a href="listar_usuarios.xhtml">Listar Todos</a></li>                            
+                        </ul>
+                    </li>                       
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
                            aria-haspopup="true" aria-expanded="false">Vacinas <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="cadastrar_vacinas.xhtml">Cadastro</a></li>
-                            <li><a href="#">Alterar</a></li>
+                            <li><a href="alterar_vacinas.xhtml">Alterar</a></li>
                                                         
                         </ul>
-                    </li>                     
+                    </li>
+                    <li><a class="scrollSuave" href="../enfermeiro/registro_vacina.xhtml">Cartão de Vacina</a></li> 
                     <li><form method="post" class="navbar-form navbar-right"
                               action="../j_spring_security_logout">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

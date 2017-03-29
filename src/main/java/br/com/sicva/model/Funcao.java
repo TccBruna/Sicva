@@ -1,14 +1,13 @@
 package br.com.sicva.model;
-// Generated 16/03/2017 15:37:02 by Hibernate Tools 4.3.1
+// Generated 28/03/2017 16:05:59 by Hibernate Tools 4.3.1
 
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,19 +20,30 @@ import javax.persistence.Table;
 public class Funcao  implements java.io.Serializable {
 
 
+     private int funcaoId;
      private String funcaoDescricao;
-     
+
     public Funcao() {
     }
 
-	
     public Funcao(String funcaoDescricao) {
-        this.funcaoDescricao = funcaoDescricao;
+       this.funcaoDescricao = funcaoDescricao;
+    }
+   
+     @Id @GeneratedValue(strategy=IDENTITY)
+
+    
+    @Column(name="FUNCAO_ID", unique=true, nullable=false)
+    public int getFuncaoId() {
+        return this.funcaoId;
     }
     
-   
-     @Id
-     @Column(name="FUNCAO_DESCRICAO", unique=true, nullable=false, length=20)
+    public void setFuncaoId(int funcaoId) {
+        this.funcaoId = funcaoId;
+    }
+
+    
+    @Column(name="FUNCAO_DESCRICAO", nullable=false, length=30)
     public String getFuncaoDescricao() {
         return this.funcaoDescricao;
     }
@@ -42,8 +52,37 @@ public class Funcao  implements java.io.Serializable {
         this.funcaoDescricao = funcaoDescricao;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 29 * hash + this.funcaoId;
+        hash = 29 * hash + Objects.hashCode(this.funcaoDescricao);
+        return hash;
+    }
 
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Funcao other = (Funcao) obj;
+        if (this.funcaoId != other.funcaoId) {
+            return false;
+        }
+        if (!Objects.equals(this.funcaoDescricao, other.funcaoDescricao)) {
+            return false;
+        }
+        return true;
+    }
+
+
+
 
 }
 

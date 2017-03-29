@@ -11,26 +11,29 @@
         <intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
         <intercept-url pattern="/enfermeiro/**" access="ROLE_ENFERMEIRO,ROLE_ADMIN" />
         <form-login login-page="/login.xhtml"                   
-                            authentication-failure-url="/login.xhtml?error=true"
-                            authentication-success-handler-ref="DirecionadorUsuario"/>
+                    authentication-failure-url="/login.xhtml?error=true"
+                    authentication-success-handler-ref="DirecionadorUsuario"/>
         
     </http>
     
     <b:bean id="DirecionadorUsuario"
-                class="br.com.sicva.seguranca.DirecionadorUsuario" />
+            class="br.com.sicva.seguranca.DirecionadorUsuario" />
         
    
     <authentication-manager>
         <authentication-provider>
             <password-encoder hash="md5"/>
             <jdbc-user-service data-source-ref="dataSource"
-                                           users-by-username-query="SELECT USUARIOS_CPF as username, USUARIO_SENHA as password, USUARIO_ATIVO as enable FROM usuarios WHERE USUARIOS_CPF=?"
-                                           authorities-by-username-query="SELECT USUARIOS_FUNCAO_USUARIOS_CPF AS username, USUARIOS_FUNCAO_DESCRICAO AS authority FROM usuarios_funcao WHERE USUARIOS_FUNCAO_USUARIOS_CPF=?" />
+                               users-by-username-query="SELECT USUARIOS_CPF as username, USUARIO_SENHA as password, USUARIO_ATIVO as enable FROM usuarios WHERE USUARIOS_CPF=?"
+                               authorities-by-username-query="SELECT USUARIOS_CPF AS username,
+                                                  FUNCAO_DESCRICAO AS authority FROM USUARIOS
+                                                  INNER JOIN funcao on FUNCAO_ID = USUARIO_FUNCAO_ID
+                                                  WHERE USUARIOS_CPF ==?" />
         </authentication-provider>
     </authentication-manager>
 
     <b:bean id="dataSource"
-                class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <b:property name="url" value="jdbc:mysql://localhost:3306/sicva" />
         <b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <b:property name="username" value="root" />

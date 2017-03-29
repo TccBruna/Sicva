@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 /**
  *
- * @author Mauricio
+ * @author Rodrigo
  */
 public class DirecionadorUsuario implements AuthenticationSuccessHandler{
 

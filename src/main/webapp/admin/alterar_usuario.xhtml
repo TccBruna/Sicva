@@ -6,7 +6,7 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="titulo">Cadastrar Usuario</ui:define>
+    <ui:define name="titulo">Alterar Usuario</ui:define>
 
     <ui:define name="menu">
        <ui:include src="menu_admin.xhtml" />
@@ -16,7 +16,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <h1>Cadastrar Usuarios!</h1>        
+                    <h1>Alterar Usuarios!</h1>        
                     <br />
                     <p:messages rendered="#{usuarioController.showMsgErros}" />
                     <h:form  class="form-horizontal" pt:role="form">
@@ -100,7 +100,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
-                                <h:commandButton   action="#{usuarioController.salvar}" value="Salvar"
+                                <h:commandButton   action="#{usuarioController.alterar}" value="Alterar"
                                                    styleClass="btn btn-success  btn-block " >
                                     
                                 </h:commandButton>
@@ -110,8 +110,7 @@
 
                     </h:form>
                     
-                </div> 
-                
+                </div>                 
             </div>
         </div>
         

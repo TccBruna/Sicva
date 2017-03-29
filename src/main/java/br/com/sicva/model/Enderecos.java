@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 16/03/2017 15:37:02 by Hibernate Tools 4.3.1
+// Generated 28/03/2017 16:05:59 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -20,20 +20,17 @@ public class Enderecos  implements java.io.Serializable {
 
 
      private Integer enderecosId;
-     private String enderecoRua;
      private Integer enderecoCep;
      private String enderecoNumero;
-     
+     private String enderecoRua;
 
     public Enderecos() {
     }
 
-    public Enderecos(String enderecoRua, Integer enderecoCep, String enderecoNumero) {
-       this.enderecoRua = enderecoRua;
+    public Enderecos(Integer enderecoCep, String enderecoNumero, String enderecoRua) {
        this.enderecoCep = enderecoCep;
        this.enderecoNumero = enderecoNumero;
-       
-       
+       this.enderecoRua = enderecoRua;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -46,16 +43,6 @@ public class Enderecos  implements java.io.Serializable {
     
     public void setEnderecosId(Integer enderecosId) {
         this.enderecosId = enderecosId;
-    }
-
-    
-    @Column(name="ENDERECO_RUA", length=30)
-    public String getEnderecoRua() {
-        return this.enderecoRua;
-    }
-    
-    public void setEnderecoRua(String enderecoRua) {
-        this.enderecoRua = enderecoRua;
     }
 
     
@@ -77,6 +64,20 @@ public class Enderecos  implements java.io.Serializable {
     public void setEnderecoNumero(String enderecoNumero) {
         this.enderecoNumero = enderecoNumero;
     }
+
+    
+    @Column(name="ENDERECO_RUA", length=30)
+    public String getEnderecoRua() {
+        return this.enderecoRua;
+    }
+    
+    public void setEnderecoRua(String enderecoRua) {
+        this.enderecoRua = enderecoRua;
+    }
+
+
+
+
 }
 
 

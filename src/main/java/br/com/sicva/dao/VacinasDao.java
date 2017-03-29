@@ -64,18 +64,22 @@ public class VacinasDao {
 
     public Vacinas consultarPorNome(String nome) {
         session = new HibernateUtil().getSessionFactory().openSession();
-        Query query = session.createSQLQuery("SELECT vacinas_descricao FROM vacinas"
-                + " WHERE vacinas_descricao LIKE = :nome").addEntity(Vacinas.class);
+        Query query = session.createSQLQuery("SELECT * FROM vacinas"
+                + " WHERE vacinas_descricao = :nome").addEntity(Vacinas.class);
         query.setString("nome", nome);
         listarVacinas = query.list();
         session.close();
-        return listarVacinas.get(0);
+        if(listarVacinas.isEmpty()){
+           return null;
+        }else{
+           return listarVacinas.get(0);
+        }
     }
 
     public Vacinas listarPorId(int codigo) {
         try {
             session = new HibernateUtil().getSessionFactory().openSession();
-            Query query = session.createSQLQuery("select * from vacinas where PACIENTES_NUMERO_REGISTRO_NASCIMENTO = :registro").addEntity(Vacinas.class);
+            Query query = session.createSQLQuery("select * from vacinas where vacinas_id = :registro").addEntity(Vacinas.class);
             query.setInteger("registro", codigo);
             listarVacinas = query.list();
             session.close();

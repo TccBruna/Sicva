@@ -43,7 +43,7 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>6.0</version>
+            <version>6.1.RC2</version>
         </dependency> 
         <!-- JAVAX SERVLET -->
         <dependency>

@@ -1,9 +1,7 @@
 package br.com.sicva.model;
-// Generated 16/03/2017 15:37:02 by Hibernate Tools 4.3.1
+// Generated 28/03/2017 16:05:59 by Hibernate Tools 4.3.1
 
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +10,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -26,17 +23,22 @@ public class ItensVacinas  implements java.io.Serializable {
 
 
      private Integer itensVacinasCodigo;
-     private ItensVacinas itensVacinas;
+     private RegistrosVacinas registrosVacinas;
      private Ubs ubs;
-     
+     private Vacinas vacinas;
 
     public ItensVacinas() {
     }
 
-    public ItensVacinas(ItensVacinas itensVacinas, Ubs ubs) {
-       this.itensVacinas = itensVacinas;
+	
+    public ItensVacinas(RegistrosVacinas registrosVacinas, Vacinas vacinas) {
+        this.registrosVacinas = registrosVacinas;
+        this.vacinas = vacinas;
+    }
+    public ItensVacinas(RegistrosVacinas registrosVacinas, Ubs ubs, Vacinas vacinas) {
+       this.registrosVacinas = registrosVacinas;
        this.ubs = ubs;
-       
+       this.vacinas = vacinas;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -52,13 +54,13 @@ public class ItensVacinas  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="ITENS_VACINAS_VACINAS_CODIGO")
-    public ItensVacinas getItensVacinas() {
-        return this.itensVacinas;
+    @JoinColumn(name="ITENS_VACINAS_CARTEIRA_ID", nullable=false)
+    public RegistrosVacinas getRegistrosVacinas() {
+        return this.registrosVacinas;
     }
     
-    public void setItensVacinas(ItensVacinas itensVacinas) {
-        this.itensVacinas = itensVacinas;
+    public void setRegistrosVacinas(RegistrosVacinas registrosVacinas) {
+        this.registrosVacinas = registrosVacinas;
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
@@ -70,7 +72,18 @@ public class ItensVacinas  implements java.io.Serializable {
     public void setUbs(Ubs ubs) {
         this.ubs = ubs;
     }
-   
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="ITENS_VACINAS_VACINAS_CODIGO", nullable=false)
+    public Vacinas getVacinas() {
+        return this.vacinas;
+    }
+    
+    public void setVacinas(Vacinas vacinas) {
+        this.vacinas = vacinas;
+    }
+
+
 
 
 }

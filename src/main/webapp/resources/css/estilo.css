@@ -2,6 +2,7 @@
 	padding-top: 100px;
 }
 
+
 section{
 	padding-top: 25px;
 	padding-bottom: 15px;
@@ -100,3 +101,13 @@ footer{
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 15px;
+  width: auto;
+}
+

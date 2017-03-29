@@ -1,0 +1,141 @@
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Index Usuario</ui:define>        
+    <ui:define name="menu">
+        <ui:include src="menu_enfermeiro.xhtml"/>
+    </ui:define>
+
+    <ui:define name="corpo">
+        <div class="container">
+            <div class="col-sm-12">
+                <div class="page-header"><h4>Cartão do paciente <small>relação de Vacinas</small></h4></div>
+
+            </div> 
+            <div class="col-sm-12">
+                <p:messages id="messages"  autoUpdate="true" closable="true" /> 
+
+                <p:ajaxStatus onstart="$('#myModal').modal('show')" onsuccess="$('#myModal').modal('hide')" />
+                <div id="myModal" class="modal fade" style="padding-top: 100px;" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="text-center">
+                                <div><img src="../resources/imgs/searching.gif" class="img-responsive"/></div>
+                                <h4>Pesquisando....</h4> 
+                            </div>   
+                        </div>
+                    </div>
+                </div>               
+                <h:form  class="form-horizontal" pt:role="form"> 
+                    <div class="form-group">                            
+                        <h:outputLabel for="inptRegistro" class="control-label col-sm-3" value="N° do Registro Geral" />                            
+                        <div class="col-sm-5">                            
+                            <h:inputText value="#{registrosVacinasController.pacienteDigitado.pacientesNumeroRegistroNascimento}" 
+                                         class="form-control" id="inptRegistro"
+                                         pt:placeholder="Digite o numero do registro"                                    
+                                         required="true"  converterMessage="Por favor inserir somente numeros"
+                                         requiredMessage="Digite o numero do registro de nascimento.">                                   
+                            </h:inputText>                            
+                        </div>
+                        <div class="col-sm-2">
+                            <p:commandButton update="formCadCarteira, campoPaciente" 
+                                             styleClass="btn btn-default " value="Pesquisar"   
+                                             actionListener="#{registrosVacinasController.PesquisarPaciente}" /> 
+                        </div>
+                    </div> 
+                </h:form>
+            </div>
+            <div class="col-sm-12">
+                <fieldset>
+                    <legend>Dados do paciente</legend>
+                    Nome: <h:outputText id="campoPaciente" value="#{registrosVacinasController.paciente.pacientesNome}"/><br/>
+                </fieldset>
+                <br/>
+            </div> 
+            <div class="col-sm-6">
+                <h2>Inserir vacina</h2>
+                <h:form>
+                    <div class="form-group">
+                        <p:outputLabel for="inputLote" styleClass="col-sm-5" value="Lote da Vacina"/>
+                        <div class="col-sm-6">
+                            <h:inputText id="inputLote" value="#{registrosVacinasController.registrosVacina.registrosLoteVacinas}"  required="true" class="form-control" /> 
+                        </div>
+                        <div class="form-group">
+                            <p:commandButton update="formCadCarteira" action="#{registrosVacinasController.InserirVacina}"  value="Salvar"/>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+            <div class="col-sm-12">
+                <h:form id="formCadCarteira">
+                    <p:dataTable styleClass="table table-striped" value="#{registrosVacinasController.itensVacinas}" var="itens" emptyMessage="Nenhum registro encontrado..."
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+                                 {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 widgetVar="ItensTable"  
+                                 rowKey="#{itens.itensVacinasCodigo}" selectionMode="single"                               
+                                 paginator="true" rows="10" rowsPerPageTemplate="5,10,15" 
+                                 sortBy="#{itens.vacinas.vacinasDescricao}" >
+         <f:facet name="header">
+            Calendario de vacina
+        </f:facet>          
+     
+        <p:columnGroup type="header">
+            <p:row>
+                <p:column rowspan="3" headerText="Faixa Etaria" />
+                <p:column colspan="4" headerText="Vacinas" />
+                <p:column rowspan="3" headerText="Opção" />
+            </p:row>            
+            <p:row>
+                <p:column headerText="Nome da vacina" />
+                <p:column headerText="Data aplicacao" />
+                <p:column headerText="Dose" />
+                <p:column headerText="Status" />
+                
+            </p:row>
+        </p:columnGroup>
+        <p:column></p:column>               
+        <p:column  headerText="Vacinas Tomadas" groupRow="true">
+            <h:outputText value="#{itens.vacinas.vacinasDescricao}" />
+        </p:column>  
+                        
+        <p:column headerText="Data da Aplicacao" >
+            <h:outputText value="#{itens.registrosVacinas.registrosDataAplicacaoVacina}" />
+        </p:column>
+        <p:column headerText="Lote" >
+            <h:outputText value="#{itens.registrosVacinas.registrosLoteVacinas}" />
+        </p:column> 
+           
+         <p:column headerText="Proxima Data" >
+            <h:outputText value="" />
+        </p:column> 
+         <p:column headerText="Proxima Data" >
+             <p:commandButton value="Aplicar"></p:commandButton>
+        </p:column>                
+                        
+    </p:dataTable>
+</h:form>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            </div>
+
+        </div>
+    </ui:define>
+
+</ui:composition>
+
