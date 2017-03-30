@@ -14,9 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
 /**
@@ -24,9 +23,10 @@ import javax.faces.model.SelectItem;
  * @author Rodrigo
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class UsuarioController {
     private List<Usuarios> usuarios;
+    private Usuarios usuarioPesquisado;
     private Usuarios usuario;
     private UsuariosDao usuariosDao;      
     private boolean showMsgErros; 
@@ -59,6 +59,27 @@ public class UsuarioController {
             erro.printStackTrace();
         }
     }
+    
+    public void PesquisarUsuario(){
+        try {
+            usuario = new Usuarios();
+            usuariosDao = new UsuariosDao();
+            usuario = usuariosDao.PesquisarUsuario(usuarioPesquisado.getUsuariosCpf());
+            this.showMsgErros = true;
+            if(usuario == null){
+                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+                 "Usuario não econtrado",null));
+            }else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                 "Usuario econtrado",null));
+            }
+        } catch (Exception e) {
+            System.out.println(""+e.getCause().getMessage());
+            this.showMsgErros = true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+                 "Erro ao pesquisar",null));
+        }
+    }
 
     public List<Usuarios> getUsuarios() {
         return usuarios;
@@ -88,7 +109,16 @@ public class UsuarioController {
         this.showMsgErros = showMsgErros;
     }
 
-    
+    public Usuarios getUsuarioPesquisado() {
+        if(usuarioPesquisado == null){
+            usuarioPesquisado = new Usuarios();
+        }
+        return usuarioPesquisado;
+    }
+
+    public void setUsuarioPesquisado(Usuarios usuarioPesquisado) {
+        this.usuarioPesquisado = usuarioPesquisado;
+    }    
     
     public List<SelectItem> getTodasFuncoes() {   
         FuncaoDao funcaoDao = new FuncaoDao();

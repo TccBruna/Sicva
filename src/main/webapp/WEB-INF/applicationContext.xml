@@ -8,27 +8,41 @@
 
     <http auto-config="true">
         <intercept-url pattern="/atendente/**" access="ROLE_ATENDENTE,ROLE_ADMIN" />
-        <intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
-        <intercept-url pattern="/enfermeiro/**" access="ROLE_ENFERMEIRO,ROLE_ADMIN" />
-        <form-login login-page="/login.xhtml"                   
-                    authentication-failure-url="/login.xhtml?error=true"
+        <intercept-url pattern="/admin/**" access="ROLE_ADMINISTRADOR" />
+        <intercept-url pattern="/enfermeiro/**" access="ROLE_ENFERMEIRO,ROLE_ADMINISTRADOR" />
+        <form-login login-page="/login.xhtml" 
+                    authentication-failure-handler-ref="authenticationFailureHandler"           
                     authentication-success-handler-ref="DirecionadorUsuario"/>
         
+        <logout invalidate-session="true"/>
     </http>
     
     <b:bean id="DirecionadorUsuario"
             class="br.com.sicva.seguranca.DirecionadorUsuario" />
         
-   
+    <b:bean id="ProvedorAutenticacao" class="br.com.sicva.seguranca.ProvedorAutenticacao"/>
+        
+    <b:bean id="authenticationFailureHandler"
+            class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
+        <b:property name="exceptionMappings">
+            <b:props>
+                <b:prop key="org.springframework.security.authentication.BadCredentialsException">/login.xhtml?badCredentials=true&amp;error=true</b:prop>
+                <b:prop key="org.springframework.security.authentication.CredentialsExpiredException">/login.xhtml?credentialsExpired=true</b:prop>
+                <b:prop key="org.springframework.security.authentication.LockedException">/login.xhtml?accountLocked=true&amp;error=true</b:prop>
+                <b:prop key="org.springframework.security.authentication.DisabledException">/login.xhtml?accountDisabled=true&amp;error=true</b:prop>
+            </b:props>
+        </b:property>
+    </b:bean>
+       
     <authentication-manager>
-        <authentication-provider>
-            <password-encoder hash="md5"/>
-            <jdbc-user-service data-source-ref="dataSource"
-                               users-by-username-query="SELECT USUARIOS_CPF as username, USUARIO_SENHA as password, USUARIO_ATIVO as enable FROM usuarios WHERE USUARIOS_CPF=?"
-                               authorities-by-username-query="SELECT USUARIOS_CPF AS username,
-                                                  FUNCAO_DESCRICAO AS authority FROM USUARIOS
-                                                  INNER JOIN funcao on FUNCAO_ID = USUARIO_FUNCAO_ID
-                                                  WHERE USUARIOS_CPF ==?" />
+        <authentication-provider ref="ProvedorAutenticacao">            
+            <!--<password-encoder hash="md5"/>
+<jdbc-user-service data-source-ref="dataSource"
+users-by-username-query="SELECT USUARIOS_CPF as username, USUARIO_SENHA as password, USUARIO_ATIVO as enable FROM usuarios WHERE USUARIOS_CPF=?"
+authorities-by-username-query="SELECT USUARIOS_CPF AS username,
+            FUNCAO_DESCRICAO AS authority FROM USUARIOS
+            INNER JOIN funcao on FUNCAO_ID = USUARIO_FUNCAO_ID
+            WHERE USUARIOS_CPF ==?" />-->
         </authentication-provider>
     </authentication-manager>
 

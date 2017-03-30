@@ -53,11 +53,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-
+                    <p:messages/>
                     <form class="form-signin" name="f" action="j_spring_security_check" method="post">
-                        <h:outputText value="Usuário e/	ou senha inválidos!"
-                                      rendered="#{param.error}"
-                                      style="color:darkred; font-size: 20px; padding-bottom: 10px;" />                        
+                        <h:outputText value="CPF Inválido!"
+                                      rendered="#{param.badCredentials}"
+                                      style="color:darkred; font-size: 20px; padding-bottom: 10px;" />   
+                        <h:outputText value="Senha incorreta!"
+                                      rendered="#{param.accountLocked}"
+                                      style="color:darkred; font-size: 20px; padding-bottom: 10px;" />
+                        <h:outputText value="Usuário está desabilitado!"
+                                      rendered="#{param.accountDisabled}"
+                                      style="color:darkred; font-size: 20px; padding-bottom: 10px;" />
                         <h2 class="form-heading">Log in</h2>
                         <div class="form-group #{param.error != null ? 'has-error' : ''}">                   
                             <div class="form-group">                                

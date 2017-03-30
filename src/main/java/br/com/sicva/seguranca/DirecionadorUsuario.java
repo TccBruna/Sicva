@@ -64,7 +64,7 @@ public class DirecionadorUsuario implements AuthenticationSuccessHandler{
             if (grantedAuthority.getAuthority().equals("ROLE_ATENDENTE")) {
                 isAtendente = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+            } else if (grantedAuthority.getAuthority().equals("ROLE_ADMINISTRADOR")) {
                 isAdmin = true;
                 break;            
             } else if (grantedAuthority.getAuthority().equals("ROLE_ENFERMEIRO")) {

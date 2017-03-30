@@ -15,11 +15,44 @@
     <ui:define name="corpo">
         <div class="container">
             <div class="row">
+                <div class="col-sm-12">
+                    
+                <p:ajaxStatus onstart="$('#myModal').modal('show')" onsuccess="$('#myModal').modal('hide')" />
+                <div id="myModal" class="modal fade" style="padding-top: 100px;" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="text-center">
+                                <div ><img src="../resources/imgs/searching.gif" class="img-responsive "/></div>
+                                <h4>Pesquisando....</h4> 
+                            </div>   
+                        </div>
+                    </div>
+                </div> 
+                <p:messages autoUpdate="true" rendered="#{usuarioController.showMsgErros}" />
+                <h:form  class="form-horizontal" pt:role="form"> 
+                    <div class="form-group">                            
+                        <h:outputLabel for="inptCpfPesq" class="control-label col-sm-3" value="CPF" />                            
+                        <div class="col-sm-5">                            
+                            <p:inputMask mask="999.999.999-99"
+                                         value="#{usuarioController.usuarioPesquisado.usuariosCpf}" 
+                                         styleClass="form-control" id="inptCpfPesq"
+                                         pt:placeholder="Digite o numero do CPF"                                  
+                                         required="true"                                          
+                                         requiredMessage="Digite o CPF.">                                   
+                            </p:inputMask>                            
+                        </div>
+                        <div class="col-sm-2">
+                            <h:commandButton  styleClass="btn btn-default " 
+                                             value="Pesquisar"   action="#{usuarioController.PesquisarUsuario}" /> 
+                        </div>
+                    </div> 
+                </h:form>
+                </div>
                 <div class="col-md-8">
                     <h1>Alterar Usuarios!</h1>        
-                    <br />
-                    <p:messages rendered="#{usuarioController.showMsgErros}" />
-                    <h:form  class="form-horizontal" pt:role="form">
+                    <br />           
+                    
+                    <h:form id="formUsuario"  class="form-horizontal" pt:role="form">
                         
                         <div class="form-group">
                             <h:outputLabel for="inputcpf" value="CPF"
